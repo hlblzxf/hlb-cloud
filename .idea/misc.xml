@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/hlb-register/pom.xml" />
+        <option value="$PROJECT_DIR$/hlb-common/pom.xml" />
+        <option value="$PROJECT_DIR$/hlb-cloud/pom.xml" />
+        <option value="$PROJECT_DIR$/hlb-auth/pom.xml" />
+        <option value="$PROJECT_DIR$/hlb-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/hlb-server-system/pom.xml" />
+        <option value="$PROJECT_DIR$/hlb-server/hlb-server-test/pom.xml" />
+        <option value="$PROJECT_DIR$/hlb-server/hlb-server-system/pom.xml" />
+        <option value="$PROJECT_DIR$/hlb-server/hlb-server-system-new/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+</project>

@@ -1,0 +1,52 @@
+server:
+  port: 8301
+spring:
+  application:
+    name: Hlb-Gateway
+  redis:
+    database: 0
+    host: 172.17.118.191
+    port: 6379
+    jedis:
+      pool:
+        min-idle: 8
+        max-idle: 500
+        max-active: 2000
+        max-wait: 10000
+    timeout: 5000
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 20
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    instance-info-replication-interval-seconds: 30
+    registry-fetch-interval-seconds: 3
+    service-url:
+      defaultZone: http://hlb:123456@localhost:8099/register/eureka/
+zuul:
+  SendErrorFilter:
+    error:
+      disable: true
+  host:
+    connect-timeout-millis: 15000
+    socket-timeout-millis: 60000
+  routes:
+    system:
+      path: /system/**
+      serviceId: Hlb-Server-System
+      sensitiveHeaders: "*"
+    auth:
+      path: /auth/**
+      serviceId: HLB-Auth
+      sensitiveHeaders: "*"
+    test:
+      path: /test/**
+      serviceId: Hlb-Server-Test
+      sensitiveHeaders: "*"
+  retryable: true
+  ignored-services: "*"
+  ribbon:
+    ReadTimeout: 3000
+    eager-load:
+      enabled: true

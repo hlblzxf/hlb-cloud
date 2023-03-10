@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hlb-auth/hlb-auth.iml" filepath="$PROJECT_DIR$/hlb-auth/hlb-auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hlb-cloud/hlb-cloud.iml" filepath="$PROJECT_DIR$/hlb-cloud/hlb-cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hlb-common/hlb-common.iml" filepath="$PROJECT_DIR$/hlb-common/hlb-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hlb-gateway/hlb-gateway.iml" filepath="$PROJECT_DIR$/hlb-gateway/hlb-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/hlb-learn-cloud.iml" filepath="$PROJECT_DIR$/.idea/hlb-learn-cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hlb-register/hlb-register.iml" filepath="$PROJECT_DIR$/hlb-register/hlb-register.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hlb-server/hlb-server.iml" filepath="$PROJECT_DIR$/hlb-server/hlb-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hlb-server/hlb-server-system/hlb-server-system.iml" filepath="$PROJECT_DIR$/hlb-server/hlb-server-system/hlb-server-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hlb-server/hlb-server-system-new/hlb-server-system-new.iml" filepath="$PROJECT_DIR$/hlb-server/hlb-server-system-new/hlb-server-system-new.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hlb-server/hlb-server-test/hlb-server-test.iml" filepath="$PROJECT_DIR$/hlb-server/hlb-server-test/hlb-server-test.iml" />
+    </modules>
+  </component>
+</project>

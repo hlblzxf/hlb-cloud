@@ -9,4 +9,5 @@ public class HlbServerConstant {
     public static final String HLB_SERVER = "Hlb-Server";
     public static final String HLB_SERVER_SYSTEM= "Hlb-Server-System";
     public static final String HLB_SERVER_TEST= "Hlb-Server-Test";
+
 }

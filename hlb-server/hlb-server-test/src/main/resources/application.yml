@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: Hlb-Server-Test
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration
   redis:
     database: 0
     host: 172.17.118.191

@@ -1,13 +1,29 @@
 server:
   port: 8101
 spring:
+  datasource:
+    dynamic:
+      hikari:
+        connection-timeout: 30000
+        max-lifetime: 1800000
+        max-pool-size: 15
+        min-idle: 5
+        connection-test-query: select 1
+        pool-name: HlbHikariCP
+      primary: base
+      datasource:
+        base:
+          username: root
+          password: 123abcABC
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/hlb_cloud_base?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
   application:
     name: Hlb-Auth
   redis:
     database: 0
     host: 172.17.118.191
     port: 6379
-    jedis:
+    lettuce:
       pool:
         min-idle: 8
         max-idle: 500
@@ -25,4 +41,12 @@ eureka:
     fetch-registry: true
     instance-info-replication-interval-seconds: 30
     registry-fetch-interval-seconds: 3
+mybatis-plus:
+  type-aliases-package: com.hlb.common.entity.system
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    jdbc-type-for-null: null
+  global-config:
+    banner: false
+
 

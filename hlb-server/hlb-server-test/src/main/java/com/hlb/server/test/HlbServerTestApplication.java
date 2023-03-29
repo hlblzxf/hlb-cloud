@@ -1,7 +1,6 @@
 package com.hlb.server.test;
 
-import com.hlb.common.annotation.EnableHlbAuthExceptionHandler;
-import com.hlb.common.annotation.EnableHlbOauth2FeignClient;
+import com.hlb.common.annotation.HlbCloudApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -11,8 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
-@EnableHlbAuthExceptionHandler
-@EnableHlbOauth2FeignClient
+@HlbCloudApplication
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class HlbServerTestApplication {
 

@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: Hlb-Server-System
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   redis:
     database: 0
     host: 172.17.118.191

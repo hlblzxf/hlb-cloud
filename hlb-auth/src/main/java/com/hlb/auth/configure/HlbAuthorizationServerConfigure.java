@@ -32,6 +32,7 @@ public class HlbAuthorizationServerConfigure extends AuthorizationServerConfigur
     private RedisConnectionFactory redisConnectionFactory;
     @Autowired
     private HlbUserDetailService userDetailService;
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired

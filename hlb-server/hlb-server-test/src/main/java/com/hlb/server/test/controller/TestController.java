@@ -31,6 +31,6 @@ public class TestController {
 
     @GetMapping("hello")
     public String hello(String name){
-        return this.helloService.hello(name);
+        return helloService.hello(name);
     }
 }

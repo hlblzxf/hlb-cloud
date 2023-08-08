@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.Map;
@@ -68,5 +69,13 @@ public class UserController {
             log.error(message, e);
             throw new HlbException(message);
         }
+    }
+
+
+    @GetMapping("success")
+    public void loginSuccess(HttpServletRequest request) {
+        String currentUsername = HlbUtil.getCurrentUsername();
+        // update last login time
+        this.userService.updateLoginTime(currentUsername);
     }
 }

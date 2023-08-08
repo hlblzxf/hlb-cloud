@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @Configuration
 @EnableResourceServer
 public class HlbResourceServerConfigure extends ResourceServerConfigurerAdapter {
+
     @Autowired
     private HlbAccessDeniedHandler accessDeniedHandler;
     @Autowired
@@ -32,6 +33,7 @@ public class HlbResourceServerConfigure extends ResourceServerConfigurerAdapter 
                 .and()
                 .authorizeRequests()
                 .antMatchers(anonUrls).permitAll()
+                .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/**").authenticated()
                 .and().httpBasic();
     }

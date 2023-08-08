@@ -40,9 +40,12 @@ public class ValidateCodeService {
         }
         HlbValidateCodeProperties code = properties.getCode();
         setHeader(response, code.getType());
+        // create captcha
         Captcha captcha = createCaptcha(code);
+        // put the captcha into redis
         redisService.set(HlbConstant.CODE_PREFIX + key, StringUtils.lowerCase(
                 captcha.text()), code.getTime());
+        // write it to response.
         captcha.out(response.getOutputStream());
     }
 

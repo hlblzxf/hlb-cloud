@@ -4,10 +4,10 @@ spring:
   application:
     name: Hlb-Gateway
   autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
   redis:
     database: 0
-    host: 172.17.118.191
+    host: ${redis.url}
     port: 6379
     jedis:
       pool:
@@ -16,6 +16,26 @@ spring:
         max-active: 2000
         max-wait: 10000
     timeout: 5000
+  boot:
+    admin:
+      client:
+        url: http://${hlb-monitor-admin}:8401
+        username: hlb
+        password: 123456
+info:
+  app:
+    name: ${spring.application.name}
+    description: "@project.description@"
+    version: "@project.version@"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
 eureka:
   instance:
     lease-renewal-interval-in-seconds: 20
@@ -25,7 +45,7 @@ eureka:
     instance-info-replication-interval-seconds: 30
     registry-fetch-interval-seconds: 3
     service-url:
-      defaultZone: http://hlb:123456@localhost:8099/register/eureka/
+      defaultZone: http://hlb:123456@${hlb-register}:8099/register/eureka/
 zuul:
   SendErrorFilter:
     error:

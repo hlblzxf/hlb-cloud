@@ -33,4 +33,11 @@ public interface IUserService extends IService<SystemUser> {
      */
     void deleteUsers(String[] userIds);
 
+    /**
+     * 更新用户登录时间
+     *
+     * @param username username
+     */
+    void updateLoginTime(String username);
+
 }

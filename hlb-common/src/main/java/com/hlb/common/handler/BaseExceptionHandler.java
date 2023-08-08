@@ -29,7 +29,7 @@ public class BaseExceptionHandler {
 
     @ExceptionHandler(value = HlbAuthException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public HlbResponse handleFebsAuthException(HlbAuthException e) {
+    public HlbResponse handleHlbAuthException(HlbAuthException e) {
         log.error("系统错误", e);
         return new HlbResponse().message(e.getMessage());
     }
@@ -42,7 +42,7 @@ public class BaseExceptionHandler {
 
     @ExceptionHandler(value = HlbException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public HlbResponse handleFebsException(HlbException e) {
+    public HlbResponse handleHlbException(HlbException e) {
         log.error("系统错误", e);
         return new HlbResponse().message(e.getMessage());
     }

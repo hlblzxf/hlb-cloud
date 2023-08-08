@@ -11,6 +11,13 @@
     <artifactId>hlb-server-test</artifactId>
     <name>hlb-server-test</name>
     <description>Hlb-Server-Test测试服务模块</description>
+    <dependencies>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>6.1</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>

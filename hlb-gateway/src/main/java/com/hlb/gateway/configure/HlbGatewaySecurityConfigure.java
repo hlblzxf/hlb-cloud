@@ -8,7 +8,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class HlbGatewaySecurityConfigure extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.csrf().disable().authorizeRequests().antMatchers("/actuator/**").permitAll();
+
+        //http.csrf().ignoringAntMatchers("/eureka/**").disable().authorizeRequests().antMatchers("/actuator/**").permitAll();
     }
 
 }

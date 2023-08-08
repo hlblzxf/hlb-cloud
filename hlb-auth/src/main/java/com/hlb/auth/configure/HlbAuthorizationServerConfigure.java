@@ -18,9 +18,17 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+
+import javax.sql.DataSource;
+import java.util.UUID;
 
 
 @Configuration
@@ -39,6 +47,10 @@ public class HlbAuthorizationServerConfigure extends AuthorizationServerConfigur
     private HlbAuthProperties authProperties;
     @Autowired
     private HlbWebResponseExceptionTranslator exceptionTranslator;
+
+    @Autowired
+    private DataSource dataSource;
+
 
 
     @Override
@@ -59,7 +71,9 @@ public class HlbAuthorizationServerConfigure extends AuthorizationServerConfigur
                         .withClient(client.getClient())
                         .secret(passwordEncoder.encode(client.getSecret()))
                         .authorizedGrantTypes(grantTypes)
-                        .scopes(client.getScope());
+                        .scopes(client.getScope())
+                        .accessTokenValiditySeconds(authProperties.getAccessTokenValiditySeconds())
+                        .refreshTokenValiditySeconds(authProperties.getRefreshTokenValiditySeconds());
             }
         }
 
@@ -68,15 +82,40 @@ public class HlbAuthorizationServerConfigure extends AuthorizationServerConfigur
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.tokenStore(tokenStore())
+                //jwt config.
+//                .accessTokenConverter(jwtAccessTokenConverter())
                 .userDetailsService(userDetailService)
                 .authenticationManager(authenticationManager)
                 .tokenServices(defaultTokenServices())
                 .exceptionTranslator(exceptionTranslator);
+
     }
 
     @Bean
     public TokenStore tokenStore() {
-        return new RedisTokenStore(redisConnectionFactory);
+
+          //jdbc token
+          //return new JdbcTokenStore(dataSource);
+
+         // redis token
+        RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
+        // 解决每次生成的 token都一样的问题
+        redisTokenStore.setAuthenticationKeyGenerator(oAuth2Authentication -> UUID.randomUUID().toString());
+         return redisTokenStore;
+
+        //Jwt token
+//        return new JwtTokenStore(jwtAccessTokenConverter());
+    }
+
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
+        DefaultAccessTokenConverter defaultAccessTokenConverter = (DefaultAccessTokenConverter) accessTokenConverter.getAccessTokenConverter();
+        DefaultUserAuthenticationConverter userAuthenticationConverter = new DefaultUserAuthenticationConverter();
+        userAuthenticationConverter.setUserDetailsService(userDetailService);
+        defaultAccessTokenConverter.setUserTokenConverter(userAuthenticationConverter);
+        accessTokenConverter.setSigningKey("hlb");
+        return accessTokenConverter;
     }
 
     @Primary

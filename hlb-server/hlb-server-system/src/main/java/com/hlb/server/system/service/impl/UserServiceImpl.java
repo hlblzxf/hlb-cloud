@@ -85,4 +85,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SystemUser> impleme
         });
     }
 
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateLoginTime(String username) {
+        SystemUser user = new SystemUser();
+        user.setLastLoginTime(new Date());
+
+        this.baseMapper.update(user, new LambdaQueryWrapper<SystemUser>().eq(SystemUser::getUsername, username));
+    }
 }

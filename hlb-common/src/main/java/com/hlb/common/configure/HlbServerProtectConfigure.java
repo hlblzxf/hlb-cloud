@@ -9,6 +9,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * This Configure is used for adding gateway token validation interceptor to each micro servers
+ */
 public class HlbServerProtectConfigure implements WebMvcConfigurer {
     @Bean
     public HandlerInterceptor hlbServerProtectInterceptor() {
@@ -25,6 +28,7 @@ public class HlbServerProtectConfigure implements WebMvcConfigurer {
     @SuppressWarnings("SpringConfigurationProxyMethods")
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        //registry gateway token validation interceptor
         registry.addInterceptor(hlbServerProtectInterceptor());
     }
 

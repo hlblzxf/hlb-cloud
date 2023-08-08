@@ -51,6 +51,7 @@ public class HlbGatewaySentinelFilter {
      * 60秒内同一个IP，同一个 key最多访问 10次
      */
     private void initGatewayRules() {
+        // load definition
         Set<ApiDefinition> definitions = new HashSet<>();
         Set<ApiPredicateItem> predicateItems = new HashSet<>();
         predicateItems.add(new ApiPathPredicateItem().setPattern("/auth/captcha"
@@ -59,6 +60,7 @@ public class HlbGatewaySentinelFilter {
                 .setPredicateItems(predicateItems);
         definitions.add(definition);
         GatewayApiDefinitionManager.loadApiDefinitions(definitions);
+        // load rule
         Set<GatewayFlowRule> rules = new HashSet<>();
         rules.add(new GatewayFlowRule("captcha")
                 .setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_CUSTOM_API_NAME)

@@ -48,7 +48,7 @@ public class SystemUser implements Serializable {
     @TableField("PASSWORD")
     private String password;
 
-    @TableField("DEPT ID")
+    @TableField("DEPT_ID")
     private Long deptid;
 
     @TableField("EMAIL")
@@ -64,13 +64,13 @@ public class SystemUser implements Serializable {
     @NotBlank(message = "{required}")
     private String status;
 
-    @TableField("CREATE TIME")
+    @TableField("CREATE_TIME")
     private Date createTime;
 
-    @TableField("MODIFY TIME")
+    @TableField("MODIFY_TIME")
     private Date modifyTime;
 
-    @TableField("LAST LOGIN TIME")
+    @TableField("LAST_LOGIN_TIME")
     private Date lastLoginTime;
 
     @TableField("SSEX")

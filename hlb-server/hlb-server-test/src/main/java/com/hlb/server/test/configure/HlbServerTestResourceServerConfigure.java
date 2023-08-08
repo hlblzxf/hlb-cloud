@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
+@SuppressWarnings("ALL")
 @Configuration
 @EnableResourceServer
 public class HlbServerTestResourceServerConfigure extends ResourceServerConfigurerAdapter {
@@ -23,6 +24,7 @@ public class HlbServerTestResourceServerConfigure extends ResourceServerConfigur
                 .requestMatchers().antMatchers("/**")
                 .and()
                 .authorizeRequests()
+                .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/**").authenticated();
     }
 

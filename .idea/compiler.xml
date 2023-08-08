@@ -9,30 +9,22 @@
         <outputRelativeToContentRoot value="true" />
         <module name="hlb-gateway" />
         <module name="hlb-server-test" />
-        <module name="hlb-register" />
         <module name="hlb-common" />
+        <module name="hlb-register" />
         <module name="hlb-auth" />
         <module name="hlb-server-system-new" />
+        <module name="hlb-monitor-admin" />
         <module name="hlb-server-system" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="hlb-auth" target="8" />
-      <module name="hlb-cloud" target="1.8" />
-      <module name="hlb-common" target="1.8" />
-      <module name="hlb-gateway" target="1.8" />
-      <module name="hlb-register" target="1.8" />
-      <module name="hlb-server" target="1.8" />
-      <module name="hlb-server-system" target="1.8" />
-      <module name="hlb-server-system-new" target="1.8" />
-      <module name="hlb-server-test" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="hlb-auth" options="-parameters" />
       <module name="hlb-common" options="-parameters" />
       <module name="hlb-gateway" options="-parameters" />
+      <module name="hlb-monitor" options="-parameters" />
+      <module name="hlb-monitor-admin" options="-parameters" />
       <module name="hlb-register" options="-parameters" />
       <module name="hlb-server" options="-parameters" />
       <module name="hlb-server-system" options="-parameters" />

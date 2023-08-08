@@ -13,6 +13,7 @@
         <module>../hlb-auth</module>
         <module>../hlb-gateway</module>
         <module>../hlb-server</module>
+        <module>../hlb-monitor</module>
     </modules>
     <packaging>pom</packaging>
 

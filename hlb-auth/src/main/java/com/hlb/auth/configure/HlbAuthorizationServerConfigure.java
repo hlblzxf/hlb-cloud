@@ -83,10 +83,10 @@ public class HlbAuthorizationServerConfigure extends AuthorizationServerConfigur
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.tokenStore(tokenStore())
                 //jwt config.
-//                .accessTokenConverter(jwtAccessTokenConverter())
+                .accessTokenConverter(jwtAccessTokenConverter())
                 .userDetailsService(userDetailService)
                 .authenticationManager(authenticationManager)
-                .tokenServices(defaultTokenServices())
+//                .tokenServices(defaultTokenServices())
                 .exceptionTranslator(exceptionTranslator);
 
     }
@@ -94,14 +94,14 @@ public class HlbAuthorizationServerConfigure extends AuthorizationServerConfigur
     @Bean
     public TokenStore tokenStore() {
 
-          //jdbc token
-          //return new JdbcTokenStore(dataSource);
+//          jdbc token
+          return new JdbcTokenStore(dataSource);
 
          // redis token
-        RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
+//        RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
         // 解决每次生成的 token都一样的问题
-        redisTokenStore.setAuthenticationKeyGenerator(oAuth2Authentication -> UUID.randomUUID().toString());
-         return redisTokenStore;
+//        redisTokenStore.setAuthenticationKeyGenerator(oAuth2Authentication -> UUID.randomUUID().toString());
+//         return redisTokenStore;
 
         //Jwt token
 //        return new JwtTokenStore(jwtAccessTokenConverter());

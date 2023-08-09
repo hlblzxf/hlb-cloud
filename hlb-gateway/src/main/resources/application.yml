@@ -3,38 +3,44 @@ server:
 spring:
   application:
     name: Hlb-Gateway
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
-  redis:
-    database: 0
-    host: ${redis.url}
-    port: 6379
-    jedis:
-      pool:
-        min-idle: 8
-        max-idle: 500
-        max-active: 2000
-        max-wait: 10000
-    timeout: 5000
   boot:
     admin:
       client:
         url: http://${hlb-monitor-admin}:8401
         username: hlb
         password: 123456
-info:
-  app:
-    name: ${spring.application.name}
-    description: "@project.description@"
-    version: "@project.version@"
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: ALWAYS
+  cloud:
+    gateway:
+      routes:
+        - id: Hlb-Auth
+          uri: lb://Hlb-Auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - name: Hystrix
+              args:
+                name: authfallback
+                fallbackUri: forward:/fallback/Hlb-Auth
+        - id: Hlb-Server-System
+          uri: lb://Hlb-Server-System
+          predicates:
+            - Path=/system/**
+          filters:
+            - name: Hystrix
+              args:
+                name: systemfallback
+                fallbackUri: forward:/fallback/Hlb-Server-System
+        - id: Hlb-Server-test
+          uri: lb://Hlb-Server-Test
+          predicates:
+            - Path=/test/**
+          filters:
+            - name: Hystrix
+              args:
+                name: testfallback
+                fallbackUri: forward:/fallback/Hlb-Server-Test
+      default-filters:
+        - StripPrefix=1
 
 eureka:
   instance:
@@ -46,29 +52,18 @@ eureka:
     registry-fetch-interval-seconds: 3
     service-url:
       defaultZone: http://hlb:123456@${hlb-register}:8099/register/eureka/
-zuul:
-  SendErrorFilter:
-    error:
-      disable: true
-  host:
-    connect-timeout-millis: 15000
-    socket-timeout-millis: 60000
-  routes:
-    system:
-      path: /system/**
-      serviceId: Hlb-Server-System
-      sensitiveHeaders: "*"
-    auth:
-      path: /auth/**
-      serviceId: HLB-Auth
-      sensitiveHeaders: "*"
-    test:
-      path: /test/**
-      serviceId: Hlb-Server-Test
-      sensitiveHeaders: "*"
-  retryable: true
-  ignored-services: "*"
-  ribbon:
-    ReadTimeout: 3000
-    eager-load:
-      enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
+  endpoint:
+    health:
+      show-details: ALWAYS
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
